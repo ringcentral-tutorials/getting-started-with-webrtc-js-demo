@@ -32,23 +32,22 @@
   .step(data-title='Installation', data-file='README.md', data-highlight='33-47')
     :markdown
       ## Using Bower
-      ```ssh
+      ```
       npm install ringcentral-web-phone
       ```
 
       ## Using NPM
-      ```ssh
+      ```
       npm install ringcentral-web-phone
       ```
 
       ## Using Vanilla JS
-      ```ssh
+
       1. Download SIP.JS: [http://sipjs.com/download/sip-0.7.5.js](http://sipjs.com/download/sip-0.7.5.js)
       2. Download WebPhone SDK: [https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/src/ringcentral-web-phone.js](https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/src/ringcentral-web-phone.js)
       3. Download audio files:
         1. [https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/audio/incoming.ogg](https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/audio/incoming.ogg)
         2. [https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/audio/outgoing.ogg](https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/audio/outgoing.ogg)
-      ```
 
       Now, let's take a look at the code behind the Demo to become familiar with developing RingCentral WebRTC application integrations, `demo/index.html`.
 
@@ -59,7 +58,7 @@
 
       Since WebRTC is browser-based, you will need to include two HTML5 video tags with some specific properties in your markup to operate the RingCentral Web Phone.
 
-      ```html
+      ```
       <video id="remoteVideo" hidden="hidden"></video>
       <video id="localVideo" hidden="hidden" muted="muted"></video>
       ```
