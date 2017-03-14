@@ -1,6 +1,6 @@
 {
     "title": "Getting Started with WebRTC",
-    "repo": "ringcentral/ringcentral-web-phone",
+    "repo": "ringcentral-tutorials/getting-started-with-webrtc-js-demo",
     "description": "This tutorial will help developers understand the basics of using RingCentral WebRTC and the Web Phone Client Library using JavaScript. Click the \"Start\" button below to begin.",
     "heroku": false
 }
