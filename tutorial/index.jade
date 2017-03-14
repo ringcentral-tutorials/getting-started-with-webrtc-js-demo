@@ -1,36 +1,200 @@
-.chapter(data-title='Your New Viewsaurus Tutorial')
-  .step(data-title='Welcome!', data-file='tutorial/config.json')
-    h2 Welcome to Viewsaurus
-
-    p Thanks for writing a Viewsaurus tutorial! If you're new to Viewsaurus, feel free to click through this brief tutorial showing you how a Viewsaurus tutorial is structured.
-
-    p The tutorial's navigation controls are located above this text. Use <i class="fa fa-fw fa-play"></i> to move to the next step of the tutorial. Use <i class="fa fa-fw fa-play fa-rotate-180"></i> to move to the previous step of the tutorial (if there is one). Use <i class="fa fa-fw fa-list"></i> to see an overview of all the steps in the tutorial.
-
-    p Let's begin by walking through the files generated for you in the `tutorial` directory with the `saurus new` command - those files are actually what is being used to show you this tutorial right now!
-
-  .step(data-title='Tutorial Configuration', data-file='tutorial/config.json')
+.chapter(data-title='Getting Started with RingCentral WebRTC')
+  .step(data-title='Welcome!')
     :markdown
-      ## Configuration
+        ## Welcome to the Getting Started with RingCentral WebRTC Tutorial
 
-      The first file we'll look at is `config.json`. This contains high-level configuration information about your tutorial. This JSON file contains several properties you can declare about your tutorial:
+        [WebRTC]() is a powerful communication tool available for developers which provides the capability implement WebRTC for making and receiving calls directly within their web applications.
 
-      * `title`: This is the title of your tutorial which will show on the first page
-      * `description`: This is a string of text that will appear above the "Start" button for your tutorial.
-      * `repo`: This is the GitHub repo that your code lives in. Right now we assume all projects are hosted there, but we'll likely make this agnostic in the future.
-      * `heroku`: This indicates whether or not your project supports instant deployment with the [Heroku Button](https://blog.heroku.com/archives/2014/8/7/heroku-button)
+        ### Most common use cases for WebRTC
 
-      Now, let's take a look at the first file that contains the actual content of the tutorial, `index.jade`.
+        * SaaS - Call Telephony Integrations
+        * CRM - Click to Dial 
 
-  .step(data-title='Step Two')
-    h2 Under Construction
+.chapter(data-title='Web Phone Demo App', data-file='README.md', data-highlight='53-66')
+  .step(data-title='Prerequisites')
+    :markdown
+        ## Requirements
 
-    p more tutorial to come.
+        * A RingCentral Account with Platform and API access (Don't have a RingCentral Account, no worries. [Get your free RingCentral Developer Account Now](https://developers.ringcentral.com/free-tier-sign-up.html))
+        * An application defined in the [RingCentral Developer Portal](https://developers.ringcentral.com) that has the following properties:
+          * Platform Type: Browser-Based
+          * API Permissions: VOIP Calling, Read Accounts
+          * Has a valid Redirect URI set
+        * A Digital Line configured in your RingCentral Account (this applies to both Sandbox and Production environments), see the [Usage section of the Web Phone README.md](https://github.com/ringcentral/ringcentral-web-phone#usage) for helpful links about Digital Lines in RingCentral
 
-  //- Example: include markdown file
-    .step(data-title='Step Three', data-file='', data-highlight='')
-      include:markdown three.md
+  .step(data-title='Using the Demo', data-file='README.md', data-highlight='143-168')
+    :markdown
+      ## Using the Demo 
 
-  //- Example: include jade file (don't need file extension)
-    .step(data-title='Step Four', data-file='', data-highlight='')
-      include four
+      Please follow the directions in the [README.md](README.md) file under the **Demo** section to use the WebRTC Web Phone Demo app either locally or using the [hosted Web Phone Demo App on Heroku](https://ringcentral-web-phone.herokuapp.com/demo)
 
+.chapter(data-title='Web Phone Client Library Installation')
+  .step(data-title='Installation', data-file='README.md', data-highlight='33-47')
+    :markdown
+      ## Using Bower
+      ```ssh
+      npm install ringcentral-web-phone
+      ```
+
+      ## Using NPM
+      ```ssh
+      npm install ringcentral-web-phone
+      ```
+
+      ## Using Vanilla JS
+      ```ssh
+      1. Download SIP.JS: [http://sipjs.com/download/sip-0.7.5.js](http://sipjs.com/download/sip-0.7.5.js)
+      2. Download WebPhone SDK: [https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/src/ringcentral-web-phone.js](https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/src/ringcentral-web-phone.js)
+      3. Download audio files:
+        1. [https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/audio/incoming.ogg](https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/audio/incoming.ogg)
+        2. [https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/audio/outgoing.ogg](https://cdn.rawgit.com/ringcentral/ringcentral-web-phone/master/audio/outgoing.ogg)
+      ```
+
+      Now, let's take a look at the code behind the Demo to become familiar with developing RingCentral WebRTC application integrations, `demo/index.html`.
+
+.chapter(data-title='Demo Markup')
+  .step(data-title='Demo Markup', data-file='demo/index.html', data-highlight='36-37')
+    :markdown
+      ## Required Markup
+
+      Since WebRTC is browser-based, you will need to include two HTML5 video tags with some specific properties in your markup to operate the RingCentral Web Phone.
+
+      ```html
+      <video id="remoteVideo" hidden="hidden"></video>
+      <video id="localVideo" hidden="hidden" muted="muted"></video>
+      ```
+
+  .step(data-title='Vendor Resources', data-file='demo/index.html', data-highlight='203-211')
+    :markdown
+      ## Vendor Resources 
+
+      Additionally, the demo references some external JavaScript files. The following of which are required for the RingCentral Web Phone to operate. Please note that the `src` attributes for your application may differ depending upon your method of installation and where you install your vendor libraries.
+
+      * jQuery
+      * Bootstrap (optional, but helpful)
+      * Fetch 
+      * ES6-Promise
+      * PubNub
+      * SIP.js
+      * RingCentral JS SDK
+      * RingCentral Web Phone
+      * Your Application Code (index.js)
+
+      Next we will take a look at the templatized markup used to load various views of the Web Phone Demo.m
+
+  .step(data-title='Incoming Call UI', data-file='demo/index.html', data-highlight='39-65')
+    :markdown
+      ## Incoming Call UI
+
+      This template is used when the application code receives an incoming voice call.
+
+  .step(data-title='Make a Call UI', data-file='demo/index.html', data-highlight='67-86')
+    :markdown
+      ## Make a Call UI
+
+      When users have successfully authenticated with the demo application, this is the default UI displayed and is used for placing outbound voice calls using WebRTC.
+
+  .step(data-title='Login UI', data-file='demo/index.html', data-highlight='88-132')
+    :markdown
+      ## Login UI 
+
+      When the demo application has initially loaded, and the user has not authenticated, this UI is displayed which supports using Password Flow Authentication (which actually should not be used with browser-based applications).
+
+  .step(data-title='Active Call UI', data-file='demo/index.html', data-highlight='134-201')
+    :markdown
+      ## Active Call UI
+
+      When a call has been placed (outbound) or received (inbound), and successfully accepted, this is the template UI which will be displayed to the user. In it, are all the primary operations of the Web Phone:
+
+      * Volume + / -
+      * Mute / Unmute
+      * Hold / Unhold
+      * Start / Stop Recording
+      * Transfer
+      * Park 
+      * Flip
+      * Send DTMF Tone
+
+.chapter(data-title='Demo JS App')
+  .step(data-title='Demo JS App', data-file='demo/index.js')
+    :markdown
+      ## Index.js 
+
+      Since WebRTC is browser-based, your application code to operate the RingCentral Web Phone will be written in JavaScript. This file is referenced (after all other dependencies) in your markup.
+
+  .step(data-title='App Vars', data-file='demo/index.js', data-highlight='3-19')
+    :markdown
+      ## Application Variables 
+
+      We begin by setting up application variables which are required, and caching some jQuery selectors for simplified reference.
+
+  .step(data-title='Template Loader', data-file='demo/index.js', data-highlight='21-27')
+    :markdown
+      ## Template Loader 
+
+      This function handles loading the templates of the demo. This is not a recommended pattern for production applications, since it introduces some potential memory leaks with any event bindings, but as this is a demo app...we do not mind as much.
+
+  .step(data-title='Obtain RingCentral API Token', data-file='demo/index.js', data-highlight='29-64')
+    :markdown
+      ## Obtain RingCentral API Token 
+
+      Here we are using the RingCentral JavaScript SDK to login to RingCentral and obtain a valid API token. You will want to replace this with an Authorization Flow (3-legged OAuth) implementation if you are using this code in a SaaS or "multi-tenant" application.
+
+      Once we have this data, we cache it in Local Storage of the browser, and lastly we retrieve information about the extension which has just authenticated.
+
+  .step(data-title='SIP Provisioning', data-file='demo/index.js', data-highlight='67-81')
+    :markdown
+      ## SIP Provisioning 
+
+      Once we have received the information about the currently authenticated extension, we attempt to provision SIP (which is used to determine if we are able to register as a WebRTC user for making and receiving calls over WebRTC).
+
+  .step(data-title='SIP Registration', data-file='demo/index.js', data-highlight='90-120')
+    :markdown
+      ## SIP Registration 
+
+      Once we have successfully received the client information and  provisioned SIP, we pass the SIP provisioning response to our `register` function which is responsible for creating the **Web Phone** and **User Agent** instances as well as registering event handlers on the **User Agent** object for the following events:
+
+      * Invite
+      * Connecting
+      * Connected
+      * Disconnected
+      * Registered
+      * Unregistered
+      * RegistrationFailed
+      * Message
+
+      Then the **Web Phone** object is returned to the `register` method caller.
+
+  .step(data-title='Load the Make Call Form', data-file='demo/index.js', data-highlight='360-382')
+    :markdown
+      ## Load the Make Call Form 
+
+      Once we have successfully registered and created the **Web Phone**, the promise chain calls the `makeCallForm` function which loads the appropriate UI template (Make Call Form) and registers an eventHandler to store the last dialed number, and which then executes the `makeCall` method (that actually uses the **Web Phone** to place the outbound voice call using WebRTC).
+
+  .step(data-title='Making the Call', data-file='demo/index.js', data-highlight='339-358')
+    :markdown
+      ## Making the Call 
+
+      The `makeCall` method expects a phone number and home country id to be passed.
+
+      This method defines a new `session` which is the result of executing the Web Phone's User Agent's **invite** method.
+
+      The `invite` method of the User Agent expects to be provided:
+
+      * number (str): the target phone number to dial in e.164 format
+      * config object with the following properites:
+          * media (obj): which renders the required HTML we created earlier
+          * fromNumber (str): the currently authenticated user's phone number in e.164 format
+          * homeCountryId
+      
+      Then the `onAccepted` method is called with the session (result of calling the User Agent's **invite** method) in the previous step.
+
+  .step(data-title='Accepted Calls', data-file='demo/index.js', data-highlight='171-337')
+    :markdown
+      ## Accepted Calls 
+
+      This is one of the longest methods in the application (depending upon the types of functionalities you desire in your Web Phone application integrations). Since we include every operation available on the Web Phone, you can see the complete reference of how we handle each of these events here from both a UI and session perspective.
+
+      It is important to note that the `onAccepted` method is used for both inbound and outbound voice calls in the demo, but you may have differing use cases and requirements that demand a different architecture.
+
+      Also, you will see that all operations are performed on the **session** object while you are using the Web Phone library, but by using this resource your integration code can be simplified considerably.
